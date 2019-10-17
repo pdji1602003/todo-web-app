@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Todo Web App</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="main">
+		<!-- 左側列表 -->
+		<div class="list-container">
+			<div class="list-header">
+				<h2 class="list-title">My Lists</h2>
+			</div>
+			<div class="list-body">
+				<form class="list-form" action="/">
+					<input type="text" placeholder="Create a new list here...">
+					<button class="btn btn-submit" type="button">+</button>
+				</form>
+				<ul class="all-lists">
+					<li class="list-item">Work out</li>
+					<li class="list-item">Study</li>
+					<li class="list-item">Relationship</li>
+				</ul>
+				<button class="btn btn-delete-list" type="button">Delete List</button>
+			</div>
+
+
+		</div>
+
+		<!-- 右側工作 -->
+		<div class="task-container">
+			<div class="task-header">
+				<h2>Study</h2>
+			</div>
+			<div class="task-body">
+				<form class="task-form" action="/">
+					<input type="text" placeholder="What needs to be done?">
+					<button class="btn btn-submit" type="button">+</button>
+				</form>
+				<ul class="all-tasks">
+					<li class="task-item">
+						<input type="checkbox" id="task-01">
+						<label for="task-01">
+							<span class="task-check-box"></span>JavaScript Challenge 01
+						</label>
+						<button class="btn-delete-task-item" type="button">×</button>
+					</li>
+					<li class="task-item">
+						<input type="checkbox" id="task-02">
+						<label for="task-02">
+							<span class="task-check-box"></span>
+							JavaScript Challenge 02
+						</label>
+						<button class="btn-delete-task-item" type="button">×</button>
+					</li>
+
+				</ul>
+				<div class="task-footer">
+					<span>3 items left</span>
+					<ul class="task-filter">
+						<li><a href="">All</a></li>
+						<li><a href="">Active</a></li>
+						<li><a href="">Completed</a></li>
+					</ul>
+					<button class="btn btn-delete-task">clear Completed</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<footer class="footer">
+		<p>Made with ❤️ by Lin</p>
+	</footer>
+</body>
+
+</html>
