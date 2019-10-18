@@ -7,42 +7,42 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Todo Web App</title>
 	<link rel="stylesheet" href="style.css">
+	<script defer src="script.js"></script>
 </head>
 
 <body>
 	<div class="main">
+
 		<!-- 左側列表 -->
 		<div class="list-container">
 			<div class="list-header">
 				<h2 class="list-title">My Lists</h2>
 			</div>
 			<div class="list-body">
-				<form class="list-form" action="/">
-					<input type="text" placeholder="Create a new list here...">
+				<form class="list-form" action="/" data-list-form>
+					<input type="text" placeholder="Create a new list here..." data-list-input>
 					<button class="btn btn-submit" type="button">+</button>
 				</form>
-				<ul class="all-lists">
-					<li class="list-item">Work out</li>
+				<ul class="all-lists" data-list-container>
+					<!-- <li class="list-item">Work out</li>
 					<li class="list-item">Study</li>
-					<li class="list-item">Relationship</li>
+					<li class="list-item">Relationship</li> -->
 				</ul>
 				<button class="btn btn-delete-list" type="button">Delete List</button>
 			</div>
-
-
 		</div>
 
 		<!-- 右側工作 -->
 		<div class="task-container">
 			<div class="task-header">
-				<h2>Study</h2>
+				<h2 data-task-title></h2>
 			</div>
 			<div class="task-body">
-				<form class="task-form" action="/">
-					<input type="text" placeholder="What needs to be done?">
+				<form class="task-form" action="/" data-task-form>
+					<input type="text" placeholder="What needs to be done?" data-task-input>
 					<button class="btn btn-submit" type="button">+</button>
 				</form>
-				<ul class="all-tasks">
+				<ul class="all-tasks" data-task-container>
 					<li class="task-item">
 						<input type="checkbox" id="task-01">
 						<label for="task-01">
@@ -58,24 +58,35 @@
 						</label>
 						<button class="btn-delete-task-item" type="button">×</button>
 					</li>
-
 				</ul>
+
 				<div class="task-footer">
-					<span>3 items left</span>
-					<ul class="task-filter">
-						<li><a href="">All</a></li>
-						<li><a href="">Active</a></li>
-						<li><a href="">Completed</a></li>
+					<span data-task-count>0 item left</span>
+					<ul class="task-filter" data-filter>
+						<li><a href="/">All</a></li>
+						<li><a href="/">Active</a></li>
+						<li><a href="/">Completed</a></li>
 					</ul>
-					<button class="btn btn-delete-task">clear Completed</button>
+					<button class="btn btn-delete-task" data-clear-completed>clear Completed</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
+
 	<footer class="footer">
 		<p>Made with ❤️ by Lin</p>
 	</footer>
+
+	<template id="task-template">
+		<li class="task-item">
+			<input type="checkbox">
+			<label>
+				<span class="task-check-box"></span>
+			</label>
+			<button class="btn-delete-task-item" type="button">×</button>
+		</li>
+	</template>
+
 </body>
 
 </html>

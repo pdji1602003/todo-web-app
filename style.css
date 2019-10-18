@@ -142,6 +142,7 @@ ul {
 .list-item {
 	padding: 12px 0 12px 5px;
 	border-bottom: dashed 1px black;
+	cursor: pointer;
 }
 
 .list-item::before {
@@ -151,10 +152,13 @@ ul {
 	height: 12px;
 	margin-right: 10px;
 	border-radius:50% ;
-	background-color: rgb(255, 123, 108);
-
-	color:#4F3C74 ;
+	background: #FFCCB4;
+	
 	text-align: center;
+}
+
+.list-item[data-active="true"]::before {
+	background-color: rgb(255, 123, 108);
 }
 
 .btn-delete-list {
@@ -308,10 +312,13 @@ ul {
 	transition: all .6s;
 }
 
-.task-filter > li > a:hover,
-.task-filter > li > a:active {
+.task-filter > li > a:hover {
 	background: #ffece1;
 } 
+
+.task-filter > li > a[data-state="active"]{
+	background: #ffece1;
+}
 
 .btn-delete-task {
   padding: 15px;
