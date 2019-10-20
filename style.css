@@ -290,6 +290,11 @@ ul {
 	border-radius:0 0 10px 10px ;
 }
 
+.task-count {
+	display:inline-block;
+	min-width: 85px;
+}
+
 .task-filter > li {
 	display: inline-block;
 	margin-right: 5px;

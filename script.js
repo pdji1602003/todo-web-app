@@ -20,7 +20,7 @@ const filter = document.querySelector('[data-filter]');
 
 //Delete Elements Selection
 const clearCompletedBtn = document.querySelector('[data-clear-completed]');
-
+const deleteBtn = document.querySelector('[data-delete-list]');
 
 // LocalStorage
 const LOCAL_STORAGE_LIST_KEY = 'todos.key';
@@ -65,16 +65,31 @@ filter.addEventListener('click', event => {
 			return;
 		}
 
-		//當選取到的link為
+		//當選取到的link為completed
 		if (target.innerText === 'Completed') {
 			target.setAttribute('data-state', 'active');
-			console.log(target);
+			selectedList.tasks.forEach(task => {
+				const uncompletedInput = document.getElementById(task.id);
+				if (task.completed === true) {
+					uncompletedInput.parentElement.style.display = '';
+				} else {
+					uncompletedInput.parentElement.style.display = 'none';
+				}
+			});
 			return;
 		}
-
 	}
 })
 
+deleteBtn.addEventListener('click', event => {
+	const {target} = event;
+	if(!target.classList.contains('btn-delete-list')) return;
+	const selectedList = todos.find(todo => todo.id === selectedId);
+	const selectedListIndex = todos.indexOf(selectedList);
+	todos.splice(selectedListIndex, 1);
+	save();
+	renderList();
+})
 
 clearCompletedBtn.addEventListener('click', event => {
 	const { target } = event;
@@ -91,7 +106,6 @@ clearCompletedBtn.addEventListener('click', event => {
 	}
 })
 
-
 taskContainer.addEventListener('click', event => {
 	const { target } = event;
 	const selectedList = todos.find(todo => todo.id === selectedId);
@@ -99,6 +113,7 @@ taskContainer.addEventListener('click', event => {
 	if (target.tagName.toLowerCase() === 'input') {
 		const selectedTask = selectedList.tasks.find(task => task.id === target.id);
 		selectedTask.completed = target.checked;
+		save();
 		updateTaskCount(selectedList);
 	}
 
@@ -176,6 +191,7 @@ function render() {
 	} else {
 		taskTitle.innerText = selectedList.name;
 		renderTask(selectedList);
+		updateTaskCount(selectedList);
 	}
 }
 
@@ -203,6 +219,7 @@ function renderTask(selectedList) {
 		const label = taskItem.querySelector('label');
 		const taskName = document.createTextNode(task.name);
 		checkbox.id = task.id;
+		checkbox.checked = task.complete;
 		label.htmlFor = task.id;
 		label.appendChild(taskName);
 		taskContainer.appendChild(taskItem);
@@ -214,11 +231,11 @@ function renderTask(selectedList) {
 1.按下submit新增一個項目時，數字需要立即加一
 2.按下task-item時，數字需要立即減一
 */
+
 function updateTaskCount(selectedList) {
 	const completedTasks = selectedList.tasks.filter(task => task.completed === false);
 	taskCount.innerText = completedTasks.length > 1 ?
 		`${completedTasks.length} items left` : `${completedTasks.length} item left`;
-
 }
 
 function resetTaskDivision() {
