@@ -21,7 +21,7 @@
 			<div class="list-body">
 				<form class="list-form" action="/" data-list-form>
 					<input type="text" placeholder="Create a new list here..." data-list-input>
-					<button class="btn btn-submit" type="button">+</button>
+					<button class="btn btn-submit" type="submit">+</button>
 				</form>
 				<ul class="all-lists" data-list-container>
 					<!-- <li class="list-item">Work out</li>
@@ -33,14 +33,14 @@
 		</div>
 
 		<!-- 右側工作 -->
-		<div class="task-container">
+		<div class="task-container" data-task-display-container>
 			<div class="task-header">
 				<h2 data-task-title></h2>
 			</div>
 			<div class="task-body">
 				<form class="task-form" action="/" data-task-form>
 					<input type="text" placeholder="What needs to be done?" data-task-input>
-					<button class="btn btn-submit" type="button">+</button>
+					<button class="btn btn-submit" type="submit">+</button>
 				</form>
 				<ul class="all-tasks" data-task-container>
 					<!-- <li class="task-item">
@@ -60,7 +60,7 @@
 					</li> -->
 				</ul>
 
-				<div class="task-footer">
+				<div class="task-footer" data-task-footer>
 					<span class="task-count" data-task-count>0 item left</span>
 					<ul class="task-filter" data-filter>
 						<li><a href="/">All</a></li>
@@ -74,7 +74,7 @@
 	</div>
 
 	<footer class="footer">
-		<p>Made with ❤️ by Lin</p>
+		<p>Made with <span role="img" aria-label="heart">❤️</span>by Linyin</p>
 	</footer>
 
 	<template id="task-template">

@@ -12,11 +12,14 @@ const listInput = document.querySelector('[data-list-input]');
 const listContainer = document.querySelector('[data-list-container]');
 const taskTitle = document.querySelector('[data-task-title]');
 const taskContainer = document.querySelector('[data-task-container]');
+const taskDisplayContainer = document.querySelector('[data-task-display-container]');
 const taskForm = document.querySelector('[data-task-form]');
 const taskInput = document.querySelector('[data-task-input]');
 const taskTemplate = document.getElementById('task-template');
 const taskCount = document.querySelector('[data-task-count]');
+const taskFooter = document.querySelector('[data-task-footer]');
 const filter = document.querySelector('[data-filter]');
+
 
 //Delete Elements Selection
 const clearCompletedBtn = document.querySelector('[data-clear-completed]');
@@ -87,6 +90,7 @@ deleteBtn.addEventListener('click', event => {
 	const selectedList = todos.find(todo => todo.id === selectedId);
 	const selectedListIndex = todos.indexOf(selectedList);
 	todos.splice(selectedListIndex, 1);
+	taskDisplayContainer.style.display = 'none';
 	save();
 	renderList();
 })
@@ -148,7 +152,7 @@ listContainer.addEventListener('click', event => {
 listForm.addEventListener('submit', event => {
 	event.preventDefault();
 	const inputValue = listInput.value;
-	if (inputValue === '' || inputValue == null) return;
+	if (inputValue === '' || inputValue === null) return;
 	const todo = processList(inputValue);
 	listInput.value = null;
 	todos.push(todo);
@@ -156,7 +160,15 @@ listForm.addEventListener('submit', event => {
 	renderList();
 })
 
+window.addEventListener('resize', setTaskContainerMargin);
+
 // Functions
+function setTaskContainerMargin(){
+	const taskFooterHeight = taskFooter.clientHeight;
+	taskContainer.style.marginBottom = taskFooterHeight + 'px';
+}
+
+
 // 將從使用者端獲取的資訊加工成符合我們需要的格式
 function processList(name) {
 	return { id: Date.now().toString(), name: name, tasks: [] };
@@ -187,8 +199,9 @@ function save() {
 function render() {
 	const selectedList = todos.find(todo => todo.id === selectedId);
 	if (selectedId == null) {
-		resetTaskDivision();
+		taskDisplayContainer.style.display = 'none'
 	} else {
+		taskDisplayContainer.style.display = ''
 		taskTitle.innerText = selectedList.name;
 		renderTask(selectedList);
 		updateTaskCount(selectedList);
@@ -238,10 +251,11 @@ function updateTaskCount(selectedList) {
 		`${completedTasks.length} items left` : `${completedTasks.length} item left`;
 }
 
-function resetTaskDivision() {
-	taskTitle.innerText = '';
-	clearElement(taskContainer);
-}
+// function resetTaskDivision() {
+// 	taskTitle.innerText = '';
+// 	clearElement(taskContainer);
+// }
+
 
 //清除list上既有的element
 function clearElement(container) {
